@@ -9,7 +9,7 @@ import os from 'os';
 dotenv.config();
 
 // Constants
-const CHUNK_SIZE = 1000;
+const CHUNK_SIZE = 25000;
 const NUM_WORKERS = Math.max(1, os.cpus().length - 1);
 
 const createDbConnection = () => postgres({
@@ -21,7 +21,8 @@ const createDbConnection = () => postgres({
     max: 20,
     idle_timeout: 0,
     connect_timeout: 30,
-    prepare: false
+    prepare: false,
+
 });
 
 async function createTable(sql: postgres.Sql, tableName: string, columns: string[]): Promise<void> {
@@ -126,7 +127,6 @@ if (isMainThread) {
         try {
             console.log('Starting import process...');
             
-            // First pass to get headers and create table
             const workbook = XLSX.readFile(filePath, { sheetRows: 1 });
             const worksheet = workbook.Sheets[workbook.SheetNames[0]];
             const headers = XLSX.utils.sheet_to_json(worksheet, { header: 1 })[0] as string[];
