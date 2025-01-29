@@ -101,7 +101,7 @@ if (!isMainThread) {
         await sql.end();
     }
 
-    const filePath = path.resolve("./src/data.xls");
+    const filePath = path.resolve("./fakeData.xlsx");
     const tableName = "excel_data";
 
     if (!fs.existsSync(filePath)) {
