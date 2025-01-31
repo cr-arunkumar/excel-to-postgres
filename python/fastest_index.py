@@ -39,7 +39,7 @@ def get_sql_type(value):
 
 def process_chunk(chunk, table_name):
     try:
-        with psycopg2.connect(conn_string,maxConnection=35) as pg_conn:
+        with psycopg2.connect(conn_string) as pg_conn:
             with pg_conn.cursor() as cur:
                 csv_buffer = io.StringIO()
                 pd.DataFrame(chunk).to_csv(csv_buffer, index=False, header=False)
