@@ -3,3 +3,4 @@ psycopg2-binary
 openpyxl
 tqdm
 python-dotenv
+python-calamine
